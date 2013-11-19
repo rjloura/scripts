@@ -1,5 +1,18 @@
 #!/bin/bash
 
+#
+# A simple script to toggle the proxy setting on and off in opensuse
+# Proxy will already have to be configured in $PROXY_FILE and this must be
+# run as root.  You may need to logout or reboot for this to take affect on
+# your specific application.  But it is perfect for me when I am behind a 
+# firewall, and need a proxy for yast, which does not require a
+# restart|logout.
+#
+# If you like it, take it.  If not send it back for a full refund.
+#
+# rjloura@gmail.com
+#
+
 PROXY_FILE="/etc/sysconfig/proxy"
 ENABLED="PROXY_ENABLED=\"yes\""
 DISABLED="PROXY_ENABLED=\"no\""
