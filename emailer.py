@@ -8,7 +8,7 @@ from email.utils import COMMASPACE, formatdate
 
 '''
 def send_mail(send_from, send_to, subject, text, files=None,
-              server="smtpout.secureserver.net"):
+              server=""):
     assert isinstance(send_to, list)
 
     msg = MIMEMultipart(
@@ -34,8 +34,7 @@ def send_mail(send_from, send_to, subject, text, files=None,
 
 
 
-def send_mail(send_from, send_pass, send_to, subject, text, files=None,
-              server=):
+def send_mail(send_from, send_pass, send_to, subject, text, files=None, server):
     msg = MIMEText(text)
     msg['Subject'] = subject
     msg['From'] = send_from

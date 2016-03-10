@@ -4,5 +4,5 @@
 # would run the getcal.py script, to email me new calendars and journals from
 # the gencourt website.
 
-cd /home/rui/scripts/gencourt;
-python -c 'from getcal import check_cals; check_cals(<username@relayname.com>, <password>, <destination>)'
+cd <path of this file>;
+python -c 'from getcal import check_cals; check_cals(<username@relayname.com>, <password>, <admin email>, <smtp server address>)'
