@@ -35,6 +35,6 @@ def check_cals(send_from, send_pass, send_to, smtp_server):
 	
 	if not found:
 		send_mail(send_from, send_pass, send_to,
-		    "No new agendads posted", "<eom>")
+		    "No new agendas posted", "<eom>", server=smtp_server)
 	f.close()
 	e.close()
