@@ -1,6 +1,7 @@
 from lxml import html
 from emailer import *
 import requests
+import json
 from datetime import datetime
 
 
@@ -38,3 +39,9 @@ def check_cals(send_from, send_pass, send_to, smtp_server):
 		    "No new agendas posted", "<eom>", server=smtp_server)
 	f.close()
 	e.close()
+
+with open('myenv.json', 'r') as f_env:
+    d = json.load(f_env)
+f_env.close()
+
+check_cals(d['send_from'], d['send_pass'], d['send_to'], d['smtp_server'])
