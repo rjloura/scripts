@@ -11,12 +11,12 @@ def send_mail(send_from, send_pass, send_to, subject, text, files=None,
               server=""):
     #assert isinstance(send_to, list)
 
-    msg = MIMEMultipart(
-        From=send_from,
-        To=send_to,
-        Date=formatdate(localtime=True),
-        Subject=subject
-    )
+    msg = MIMEMultipart()
+
+    msg['Subject'] = subject
+    msg['From'] = send_from
+    msg['To'] = send_to
+    msg['Date'] = formatdate(localtime=True)
 
     msg.attach(MIMEText(text))
 
@@ -29,22 +29,23 @@ def send_mail(send_from, send_pass, send_to, subject, text, files=None,
             ))
     '''
 
-    ctype, encoding = mimetypes.guess_type(files)
-    if ctype is None or encoding is not None:
-        ctype = "application/octet-stream"
+    if files:
+        ctype, encoding = mimetypes.guess_type(files)
+        if ctype is None or encoding is not None:
+            ctype = "application/octet-stream"
 
-    maintype, subtype = ctype.split("/", 1)
+        maintype, subtype = ctype.split("/", 1)
 
-    if maintype == "text":
-        fp = open(files)
-        attachment = MIMEText(fp.read(), _subtype=subtype)
-        fp.close()
-    else:
-        # TODO: implement more types
-        assert 0
+        if maintype == "text":
+            fp = open(files)
+            attachment = MIMEText(fp.read(), _subtype=subtype)
+            fp.close()
+        else:
+            # TODO: implement more types
+            assert 0
 
-    attachment.add_header("Content-Disposition", "attachment", filename=files)
-    msg.attach(attachment)
+        attachment.add_header("Content-Disposition", "attachment", filename=files)
+        msg.attach(attachment)
 
     smtp = smtplib.SMTP(server)
     smtp.starttls()
@@ -68,3 +69,4 @@ def send_mail(send_from, send_pass, send_to, subject, text, files=None,
     smtp.sendmail(send_from, [send_to], msg.as_string())
     smtp.quit()
 '''
+
